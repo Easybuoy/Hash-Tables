@@ -51,10 +51,25 @@ class HashTable:
 
         Fill this in.
         '''
+        key_idx = self._hash_mod(key)
+
+        if self.storage[key_idx] == None:
+            self.storage[key_idx] = LinkedPair(key, value)
+        else:
+            existing_key = self.storage[key_idx]
+            while existing_key and existing_key.key != key:
+                prev, existing_key = existing_key, existing_key.next
+                print(prev.value)
+                print(existing_key)
+                # break
+                if existing_key:
+                    prev.value = value
+                else:
+                    existing_key = LinkedPair(key, value)
         # print(self.storage[key])
         # item = (key, value)
         # self.storage[key] = value
-        pass
+
 
     def remove(self, key):
         '''
