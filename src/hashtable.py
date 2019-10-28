@@ -1,21 +1,24 @@
 # '''
 # Linked List hash table key/value pair
 # '''
+
+
 class LinkedPair:
     def __init__(self, key, value):
         self.key = key
         self.value = value
         self.next = None
 
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
     that accepts string keys
     '''
+
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
-
 
     def _hash(self, key):
         '''
@@ -25,7 +28,6 @@ class HashTable:
         '''
         return hash(key)
 
-
     def _hash_djb2(self, key):
         '''
         Hash an arbitrary key using DJB2 hash
@@ -34,14 +36,12 @@ class HashTable:
         '''
         pass
 
-
     def _hash_mod(self, key):
         '''
         Take an arbitrary key and return a valid integer index
         within the storage capacity of the hash table.
         '''
         return self._hash(key) % self.capacity
-
 
     def insert(self, key, value):
         '''
@@ -51,9 +51,10 @@ class HashTable:
 
         Fill this in.
         '''
+        # print(self.storage[key])
+        # item = (key, value)
+        # self.storage[key] = value
         pass
-
-
 
     def remove(self, key):
         '''
@@ -63,8 +64,10 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        if key in self.storage:
+            del self.storage[key]
+            return
+        print('warning, key not found')
 
     def retrieve(self, key):
         '''
@@ -74,8 +77,9 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        if key in self.storage:
+            return self.storage[key]
+        return None
 
     def resize(self):
         '''
@@ -84,8 +88,14 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        self.capacity *= 2
+        # create a new storage
+        new_storage = [None] * self.capacity
+        # copy over the contents of storage to the new storage
+        for i in range(len(self.storage)):
+            new_storage[i] = self.storage[i]
+        # set the storage to be the new storage
+        self.storage = new_storage
 
 
 if __name__ == "__main__":
@@ -115,3 +125,4 @@ if __name__ == "__main__":
     print(ht.retrieve("line_3"))
 
     print("")
+    print(ht.remove(0))
