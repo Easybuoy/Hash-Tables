@@ -65,10 +65,6 @@ class HashTable:
 
             else:
                 prev.next = LinkedPair(key, value)
-                # break
-        # print(self.storage[key])
-        # item = (key, value)
-        # self.storage[key] = value
 
     def remove(self, key):
         '''
@@ -78,10 +74,25 @@ class HashTable:
 
         Fill this in.
         '''
-        if key in self.storage:
-            del self.storage[key]
-            return
-        print('warning, key not found')
+        print('keyy', key)
+        # hashed_key = self._hash_mod(key)
+
+        # existing_key = self.storage[key]
+        # print(existing_key.value, 'exits')
+        # print(existing_key.key, key)
+        # if (existing_key.key == key):
+        #     del existing_key.value
+        # print(existing_key.value, 'exist key')
+        # while not existing_key:
+
+        # if self.storage[hashed_key]:
+        #     del self.storage[hashed_key]
+        # else:
+
+        # print('warning, key not found')
+        # if key in self.storage:
+        #     del self.storage[key]
+        #     return
 
     def retrieve(self, key):
         '''
@@ -92,7 +103,7 @@ class HashTable:
         Fill this in.
         '''
         hashed_key = self._hash_mod(key)
-        
+
         if self.storage[hashed_key]:
             existing_key = self.storage[hashed_key]
             while existing_key.key != key:
@@ -107,13 +118,12 @@ class HashTable:
 
         Fill this in.
         '''
-        self.capacity *= 2
-        # create a new storage
-        new_storage = [None] * self.capacity
-        # copy over the contents of storage to the new storage
-        for i in range(len(self.storage)):
+        newCapacity = self.capacity * 2
+        new_storage = [None] * newCapacity
+
+        for i in range(self.capacity):
             new_storage[i] = self.storage[i]
-        # set the storage to be the new storage
+
         self.storage = new_storage
 
 
