@@ -121,7 +121,7 @@ class HashTable:
         newCapacity = self.capacity * 2
         new_storage = [None] * newCapacity
 
-        for i in range(self.capacity):
+        for i in range(len(self.storage)):
             new_storage[i] = self.storage[i]
 
         self.storage = new_storage
