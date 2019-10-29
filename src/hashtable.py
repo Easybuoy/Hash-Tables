@@ -59,17 +59,16 @@ class HashTable:
             existing_key = self.storage[key_idx]
             while existing_key and existing_key.key != key:
                 prev, existing_key = existing_key, existing_key.next
-                print(prev.value)
-                print(existing_key)
+
+            if existing_key:
+                existing_key.value = value
+
+            else:
+                prev.next = LinkedPair(key, value)
                 # break
-                if existing_key:
-                    prev.value = value
-                else:
-                    existing_key = LinkedPair(key, value)
         # print(self.storage[key])
         # item = (key, value)
         # self.storage[key] = value
-
 
     def remove(self, key):
         '''
@@ -92,8 +91,13 @@ class HashTable:
 
         Fill this in.
         '''
-        if key in self.storage:
-            return self.storage[key]
+        hashed_key = self._hash_mod(key)
+        
+        if self.storage[hashed_key]:
+            existing_key = self.storage[hashed_key]
+            while existing_key.key != key:
+                existing_key = existing_key.next
+            return existing_key.value
         return None
 
     def resize(self):
