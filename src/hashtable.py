@@ -74,25 +74,22 @@ class HashTable:
 
         Fill this in.
         '''
-        print('keyy', key)
-        # hashed_key = self._hash_mod(key)
+        hashed_key = self._hash_mod(key)
 
-        # existing_key = self.storage[key]
-        # print(existing_key.value, 'exits')
-        # print(existing_key.key, key)
-        # if (existing_key.key == key):
-        #     del existing_key.value
-        # print(existing_key.value, 'exist key')
-        # while not existing_key:
+        existing_key = self.storage[hashed_key]
+        previous_node = existing_key
+        if (existing_key != None):
+            if (existing_key.key == key):
+                self.storage[hashed_key] = existing_key.next
+                return
+            while existing_key and existing_key.key != key:
+                previous_node = existing_key
+                existing_key = existing_key.next
 
-        # if self.storage[hashed_key]:
-        #     del self.storage[hashed_key]
-        # else:
-
-        # print('warning, key not found')
-        # if key in self.storage:
-        #     del self.storage[key]
-        #     return
+            if existing_key:
+                previous_node.next = existing_key.next
+        else:
+            print('Key not found')
 
     def retrieve(self, key):
         '''
