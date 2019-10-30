@@ -88,8 +88,8 @@ class HashTable:
 
             if existing_key:
                 previous_node.next = existing_key.next
-            else:
-                print('Key not found')
+        else:
+            print('Key not found')
 
     def retrieve(self, key):
         '''
